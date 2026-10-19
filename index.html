@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard IoT ESP32 - Firebase</title>
+  
+  <!-- CSS Tailwind pour le design -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Chart.js pour le graphique -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-gray-100 min-h-screen p-6">
+
+  <div class="max-w-6xl mx-auto space-y-6">
+    <!-- En-tête -->
+    <header class="bg-white p-6 rounded-xl shadow-md flex justify-between items-center">
+      <div>
+        <h1 class="text-2xl font-bold text-gray-800">Control Panel IoT ESP32</h1>
+        <p class="text-gray-500 text-sm">Supervision & Contrôle Realtime Database Firebase</p>
+      </div>
+      <div id="status" class="px-4 py-2 rounded-full text-xs font-semibold bg-yellow-100 text-yellow-800">
+        Connexion en cours...
+      </div>
+    </header>
+
+    <!-- Contrôle des LEDs -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <!-- LED 1 -->
+      <div class="bg-white p-6 rounded-xl shadow-md flex justify-between items-center">
+        <div>
+          <h2 class="text-lg font-semibold text-gray-700">LED 1 (GPIO 12)</h2>
+          <p id="led1-text" class="text-sm font-bold text-red-500">ÉTEINTE</p>
+        </div>
+        <button id="btn-led1" onclick="toggleLed('Led_1')" class="px-6 py-3 bg-gray-300 text-gray-700 font-bold rounded-lg hover:bg-gray-400 transition">
+          COMMUTER
+        </button>
+      </div>
+
+      <!-- LED 2 -->
+      <div class="bg-white p-6 rounded-xl shadow-md flex justify-between items-center">
+        <div>
+          <h2 class="text-lg font-semibold text-gray-700">LED 2 (GPIO 23)</h2>
+          <p id="led2-text" class="text-sm font-bold text-red-500">ÉTEINTE</p>
+        </div>
+        <button id="btn-led2" onclick="toggleLed('Led_2')" class="px-6 py-3 bg-gray-300 text-gray-700 font-bold rounded-lg hover:bg-gray-400 transition">
+          COMMUTER
+        </button>
+      </div>
+    </div>
+
+    <!-- Relevés du capteur DHT22 -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="bg-white p-6 rounded-xl shadow-md text-center">
+        <h2 class="text-sm font-bold text-gray-400 uppercase tracking-wide">Température</h2>
+        <div class="text-5xl font-extrabold text-orange-500 my-2">
+          <span id="temp">--</span> °C
+        </div>
+      </div>
+
+      <div class="bg-white p-6 rounded-xl shadow-md text-center">
+        <h2 class="text-sm font-bold text-gray-400 uppercase tracking-wide">Humidité</h2>
+        <div class="text-5xl font-extrabold text-blue-500 my-2">
+          <span id="hum">--</span> %
+        </div>
+      </div>
+    </div>
+
+    <!-- Graphique d'historique -->
+    <div class="bg-white p-6 rounded-xl shadow-md">
+      <h2 class="text-lg font-bold text-gray-700 mb-4">Évolution en temps réel</h2>
+      <canvas id="iotChart" class="w-full h-64"></canvas>
+    </div>
+  </div>
+
+  <!-- Fichier JS externe -->
+  <script src="app.js"></script>
+</body>
+</html>
